@@ -1,2 +1,2 @@
-biocomponents
+Model Merging Example
 =============

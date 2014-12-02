@@ -1,7 +1,9 @@
 def test_truth_table(testmodel, input_ids, output_ids, truth_table,
-         ht=0.8, lt=0.2):
+         ht=0.8, lt=0.2, plot=False):
     import tellurium as te
     r = te.loada(testmodel)
+    
+    sims = []
 
     for row in truth_table:
         message = ['When']
@@ -10,6 +12,7 @@ def test_truth_table(testmodel, input_ids, output_ids, truth_table,
             r[input_ids[i]] = input_val
 
         sim = r.simulate(0, 100, 100, ['time'] + input_ids + output_ids)
+        sims.append(sim)
         t = 99
 
         for i, output_val in enumerate(row[1]):
@@ -25,3 +28,4 @@ def test_truth_table(testmodel, input_ids, output_ids, truth_table,
                 assert sim[t][ind] < lt, full_message
             else:
                 assert sim[t][ind] > ht, full_message
+    return sims

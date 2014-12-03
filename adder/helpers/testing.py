@@ -27,4 +27,4 @@ def test_truth_table(testmodel, input_ids, output_ids, truth_table,
                 assert sim[delay][ind] < lt, full_message
             else:
                 assert sim[delay][ind] > ht, full_message
-    return sims
+    return r, sims
